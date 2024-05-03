@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 476047573}
   - component: {fileID: 476047572}
   - component: {fileID: 476047571}
+  - component: {fileID: 476047575}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -171,12 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -233,6 +234,62 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &476047575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476047570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4147982e252e3e64887198d9cc1a446a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switches:
+  - toggleSwitch: {fileID: 747205739}
+    isSolution: 0
+    isOn: 0
+    pos1: -1
+    pos2: -1
+  - toggleSwitch: {fileID: 1399743939}
+    isSolution: 0
+    isOn: 0
+    pos1: 0
+    pos2: 9
+  - toggleSwitch: {fileID: 1848274992}
+    isSolution: 1
+    isOn: 0
+    pos1: 1
+    pos2: 8
+  - toggleSwitch: {fileID: 1990526210}
+    isSolution: 0
+    isOn: 0
+    pos1: 2
+    pos2: 7
+  - toggleSwitch: {fileID: 1443177387}
+    isSolution: 1
+    isOn: 0
+    pos1: 3
+    pos2: 6
+  - toggleSwitch: {fileID: 1051752742}
+    isSolution: 0
+    isOn: 0
+    pos1: 4
+    pos2: 5
+  spectrometerText: {fileID: 801050146}
+  angrams:
+  - Cr
+  - U
+  - Ti
+  - Es
+  - Al
+  - Pr
+  - C
+  - S
+  - I
+  - Re
+  answerText: 
 --- !u!1 &515337579
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +371,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 515337582}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 476047575}
+        m_TargetAssemblyTypeName: PanelController, Assembly-CSharp
+        m_MethodName: OnButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &515337582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,6 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60344650733d3f46a233ef7cf619f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 476047575}
   buttonImage: {fileID: 747205737}
   offSprite: {fileID: 21300000, guid: 1551545a9fd248e45bd061746e36d458, type: 3}
   onSprite: {fileID: 21300000, guid: daad8d048ef5a13438cd5dbcfef451db, type: 3}
@@ -1074,6 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60344650733d3f46a233ef7cf619f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 476047575}
   buttonImage: {fileID: 1051752740}
   offSprite: {fileID: 21300000, guid: 1551545a9fd248e45bd061746e36d458, type: 3}
   onSprite: {fileID: 21300000, guid: daad8d048ef5a13438cd5dbcfef451db, type: 3}
@@ -1222,6 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60344650733d3f46a233ef7cf619f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 476047575}
   buttonImage: {fileID: 1399743937}
   offSprite: {fileID: 21300000, guid: 1551545a9fd248e45bd061746e36d458, type: 3}
   onSprite: {fileID: 21300000, guid: daad8d048ef5a13438cd5dbcfef451db, type: 3}
@@ -1370,6 +1442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60344650733d3f46a233ef7cf619f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 476047575}
   buttonImage: {fileID: 1443177385}
   offSprite: {fileID: 21300000, guid: 1551545a9fd248e45bd061746e36d458, type: 3}
   onSprite: {fileID: 21300000, guid: daad8d048ef5a13438cd5dbcfef451db, type: 3}
@@ -1518,6 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60344650733d3f46a233ef7cf619f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 476047575}
   buttonImage: {fileID: 1848274990}
   offSprite: {fileID: 21300000, guid: 1551545a9fd248e45bd061746e36d458, type: 3}
   onSprite: {fileID: 21300000, guid: daad8d048ef5a13438cd5dbcfef451db, type: 3}
@@ -1734,6 +1808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60344650733d3f46a233ef7cf619f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 476047575}
   buttonImage: {fileID: 1990526208}
   offSprite: {fileID: 21300000, guid: 1551545a9fd248e45bd061746e36d458, type: 3}
   onSprite: {fileID: 21300000, guid: daad8d048ef5a13438cd5dbcfef451db, type: 3}
