@@ -28,13 +28,7 @@ public class PanelController : MonoBehaviour
     private bool reverse = false;
 
     void Start() {
-        spectrometerText.text = "";
-        for (int i = 0; i < angrams.Length; i++) {
-            spectrometerText.text += angrams[i];
-            if (i == 4) {
-                spectrometerText.text += " ";
-            }
-        }
+        displayText();
     }
 
     public void SwitchClicked(ToggleSwitch aSwitch, bool isOn) {
@@ -52,9 +46,18 @@ public class PanelController : MonoBehaviour
                 }
             }
         }
+        displayText();
+    }
 
+    public void OnButtonPress() {
+        if (buttonLock) {
+            return;
+        }
+        StartCoroutine(onButtonHelper());
+    }
+
+    private void displayText() {
         spectrometerText.text = "";
-
         if (reverse) {
             for (int i = 5; i < angrams.Length; i++) {
                 spectrometerText.text += angrams[i];
@@ -73,20 +76,13 @@ public class PanelController : MonoBehaviour
         }
     }
 
-    public void OnButtonPress() {
-        if (buttonLock) {
-            return;
-        }
-        StartCoroutine(onButtonHelper());
-    }
-
     private IEnumerator onButtonHelper() {
         for (int i = 0; i < switches.Length; i++) {
             switches[i].toggleSwitch.SetButtonLock(true);
         }
         buttonLock = true;
 
-        bool solution = false;
+        bool solution = true;
         for (int i = 0; i < switches.Length; i++) {
             if ((switches[i].isSolution ^ switches[i].isOn)) {
                 solution = false;
@@ -107,13 +103,7 @@ public class PanelController : MonoBehaviour
         } else {
             spectrometerText.text = "Error: Unable to start";
             yield return new WaitForSeconds(2f);
-            spectrometerText.text = "";
-            for (int i = 0; i < angrams.Length; i++) {
-                spectrometerText.text += angrams[i];
-                if (i == 4) {
-                    spectrometerText.text += " ";
-                }
-            }
+            displayText();
         }
         for (int i = 0; i < switches.Length; i++) {
             switches[i].toggleSwitch.SetButtonLock(false);
