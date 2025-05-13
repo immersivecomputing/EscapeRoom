@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,8 +28,9 @@ public class ToggleSwitch : MonoBehaviour
             buttonImage.sprite = offSprite;
             isOn = false;
         }
-
-        controller.SwitchClicked(this, isOn);
+        if (controller != null) {
+            controller.SwitchClicked(this, isOn);
+        }
     }
 
     public void SetButtonLock(bool locked) {
