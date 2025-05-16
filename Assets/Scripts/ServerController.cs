@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
 
@@ -15,7 +16,9 @@ public class ServerController : MonoBehaviour
 
     [SerializeField] private SwitchInfo[] switches;
     [SerializeField] private TextMeshProUGUI serverText;
+    [SerializeField] private GameObject whiteImage;
     private bool buttonLock = false;
+    private bool executable = false;
 
     public void SwitchClicked(int aSwitch) {
         switches[aSwitch].isOn = !switches[aSwitch].isOn;
@@ -42,22 +45,14 @@ public class ServerController : MonoBehaviour
         }
         buttonLock = true;
 
-        if (serversActive == 0) {
+        if (!executable) {
             serverText.text = "Error: Executable Required";
-        } else if (serversActive < 3) {
-            serverText.text = "Error: Insufficient Memory";
-        } else if (serversActive >= 3 && failure) {
-            serverText.text = "Processing";
-            yield return new WaitForSeconds(0.5f);
-            serverText.text = "Processing.";
-            yield return new WaitForSeconds(0.5f);
-            serverText.text = "Processing..";
-            yield return new WaitForSeconds(0.5f);
-            serverText.text = "Processing...";
-            yield return new WaitForSeconds(0.5f);
-            serverText.text = "Error: Server Failure";
-        } else if (serversActive >= 3 && !failure) {
-            for (int i = 0; i < 5; i++) {
+        } else {
+            if (serversActive == 0) {
+                serverText.text = "Error: Insufficient Memory";
+            } else if (serversActive < 3) {
+                serverText.text = "Error: Insufficient Memory";
+            } else if (serversActive >= 3 && failure) {
                 serverText.text = "Processing";
                 yield return new WaitForSeconds(0.5f);
                 serverText.text = "Processing.";
@@ -66,15 +61,33 @@ public class ServerController : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 serverText.text = "Processing...";
                 yield return new WaitForSeconds(0.5f);
+                serverText.text = "Error: Server Failure";
+            } else if (serversActive >= 3 && !failure) {
+                for (int i = 0; i < 5; i++) {
+                    serverText.text = "Processing";
+                    yield return new WaitForSeconds(0.5f);
+                    serverText.text = "Processing.";
+                    yield return new WaitForSeconds(0.5f);
+                    serverText.text = "Processing..";
+                    yield return new WaitForSeconds(0.5f);
+                    serverText.text = "Processing...";
+                    yield return new WaitForSeconds(0.5f);
+                }
+                serverText.text = "Code Successfully Executed";
+                yield return new WaitForSeconds(2f);
+                serverText.text = "Superconducter Confirmation Confirmed: CaFFeIne";
             }
-            serverText.text = "Code Successfully Executed";
-            yield return new WaitForSeconds(2f);
-            serverText.text = "Superconducter Confirmation Confirmed: CaFFeIne";
-        }
 
+            
+        }
         buttonLock = false;
         for (int i = 0; i < switches.Length; i++) {
             switches[i].toggleSwitch.SetButtonLock(false);
         }
+    }
+
+    public void SetExecutable(bool isSet) {
+        executable = isSet;
+        whiteImage.SetActive(isSet);
     }
 }
